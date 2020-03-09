@@ -38,7 +38,34 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let arLet = expr.match(/.{1,10}/g);
+    let strReturn = "";
+
+    arLet.forEach(function(itemLet, indexLet) {//буква
+        
+        if (itemLet == "**********") {//пробел
+            strReturn += " ";
+        }else{
+            let strMorse = "";
+
+            let arChar = itemLet.match(/.{1,2}/g);
+            arChar.forEach(function(itemChar, indexChar) {//точка/тире
+                switch (itemChar) {
+                    case "10":
+                        strMorse += ".";
+                        break;
+                    case "11":
+                        strMorse += "-";
+                        break;
+                }
+            });
+
+            strReturn += MORSE_TABLE[strMorse];
+        }
+
+    });
+
+    return strReturn;
 }
 
 module.exports = {
